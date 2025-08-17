@@ -1,0 +1,8 @@
+-- Active: 1755423676066@@127.0.0.1@3306@batch01625
+SHOW DATABASEs;
+
+show TABLES;
+
+SELECT* FROM customer;
+
+SELECT * FROM student;
