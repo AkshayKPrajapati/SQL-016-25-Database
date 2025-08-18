@@ -79,3 +79,21 @@ alter table student modify contact char(10);
 -- change the name of the student table 
 alter table student rename column sname to student_name;
 
+--  remove the primary key of the student table
+alter table location drop primary key;
+-- departmentError Code: 1553. Cannot drop index 'PRIMARY': needed in a foreign key constraint
+
+-- we cant be remove primary key if it have foreign key reference
+alter table department drop primary key;
+alter table location add primary key (pincode);
+
+-- Error Code: 1553. Cannot drop index 'PRIMARY': needed in a foreign key constraint
+
+-- rename table
+rename table student to std;
+
+-- delete table std;
+drop table std;
+
+
+select * from std;
