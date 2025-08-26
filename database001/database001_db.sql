@@ -93,32 +93,71 @@ select FIRST_NAME ,length(first_name) as size from employee;
 -- find the employee whoes  the last name has 5 character.
 
 select * from employee where length(last_name)=5;
+SELECT CONCAT('Hello ', first_name) AS greeting FROM employee;
+select concat(FIRST_NAME,' ' ,last_name) as fullname from employee;
+
+-- upper and lower function
+select upper(first_name), lower(last_name) from employee;
+
+-- substr(originalstring , starting from index, length)
+select substr('fusion',1,3); -- fus
+select substr('FusionInstitute ',3,5); -- sioni
+
+-- stating 5 character of the full name
+select First_name, last_name,
+ substr(concat(first_name,last_name),1,5)
+ as info from employee;
+ 
+-- display half part of the employee's first name
+SELECT 
+    first_name, 
+    SUBSTRING(first_name, 1, FLOOR(LENGTH(first_name) / 2)) AS halfpart 
+FROM 
+    employee;
 
 
+-- instr
+
+select instr('fusion','s');-- the the postion 
+
+-- find the employee whoes first_name do not have 'n';
+SELECT 
+    first_name 
+FROM 
+    database001.employee 
+WHERE 
+    INSTR(first_name, 'n') = 0;
+
+select substr('fusion',-4,2);   -- return the value output : si
+
+-- aggrate /grouping  function
+select count(SALARY) from employee;
+select min(SALARY) from employee;
+select max(SALARY) from employee;
+select avg(SALARY) from employee;
+select sum(SALARY) from employee;
+
+-- group by
+
+select DEPARTMENT_ID , max(salary) from employee group by DEPARTMENT_ID;
+
+-- find how many employee are there for every ddepartment;
+select DEPARTMENT_ID , count(*) from employee group by DEPARTMENT_ID; 
+
+-- 
+
+select FIRST_NAME , count(*) from employee group by FIRST_NAME;
+-- having clause
+
+ -- find duplicate employee name 
+select FIRST_NAME , count(*) from employee group by FIRST_NAME having count(*)>1;
+ 
 
 
+-- find the departments where minimum 3 employees are there;
+select DEPARTMENT_ID , count(*) as emp_count from employee group by department_id having count(*)>3;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
@@ -235,3 +274,31 @@ delimiter ;
 
 call newLoan(103,8000,3.6);
 
+
+-- with into paramter
+delimiter //
+create procedure multiplyby100 (inout n int)
+begin 
+set n=n*100;
+end //
+delimiter ;
+
+set @n=2;
+call multiplyby100(@n);
+select @n;
+
+
+
+
+-- tigger 
+delimiter //
+create trigger empBackUp
+after delete on empTable
+for each row
+begin 
+insert into empBackUp values(old.emp_id,old.emp_name,old.contact);
+end //
+delimiter ;
+
+
+delete from empTable where emp_id = 3;
