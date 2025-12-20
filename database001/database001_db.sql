@@ -155,9 +155,24 @@ select FIRST_NAME , count(*) from employee group by FIRST_NAME having count(*)>1
 
 
 -- find the departments where minimum 3 employees are there;
-select DEPARTMENT_ID , count(*) as emp_count from employee group by department_id having count(*)>3;
+select DEPARTMENT_ID , count(*) as emp_count from employee group by department_id having count(*)>=3;
 
- 
+-- find departments and department wise avarge salary of the employee
+-- whoes first_name has 'a' and avg salary should be greater than 5000;
+ use database001;
+SELECT department_id, AVG(salary) AS avg_salary
+FROM employee
+WHERE first_name LIKE '%a%'
+GROUP BY department_id
+HAVING AVG(salary) > 5000;
+
+
+-- window 
+
+SELECT *,
+       ROW_NUMBER() OVER (ORDER BY salary) AS row_num,
+       rank() over(order by salary) as 'rank'
+FROM employee;
 
 
 
