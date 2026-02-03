@@ -7,6 +7,6 @@ create table fileInfo(
 
 );
 
-
  -- if i want to remove data then use this query
 TRUNCATE TABLE orm.fileinfo;
+

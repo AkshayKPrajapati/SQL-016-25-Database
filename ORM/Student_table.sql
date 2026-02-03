@@ -9,7 +9,7 @@ CREATE TABLE student (
 
 select * from student;
 
-
+-- insert new data
 insert into student(
 	id,name,city,mark
 )
