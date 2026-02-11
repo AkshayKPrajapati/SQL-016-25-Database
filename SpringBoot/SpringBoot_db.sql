@@ -18,3 +18,11 @@ select* from laptop;
 
 -- select by city
 select * from student where city="pune";
+-- only remove the data
+truncate table students;
+select * from springboot.student_data;
+
+-- inserting data
+insert into springboot.student_data value(
+103,'Kiran');
+
