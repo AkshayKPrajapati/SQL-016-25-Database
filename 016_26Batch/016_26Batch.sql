@@ -97,7 +97,11 @@ alter table Department drop primary key ;
 -- how to remove foreign key in the table;
 alter table students drop foreign key  dept_id_fk;
 
+-- how to add foreign key in the table;
 
+ALTER TABLE students 
+ADD CONSTRAINT dept_id_fk
+FOREIGN KEY (dept_id) REFERENCES Department(dept_id);
 
 -- Rename table
 rename table students to NewStudent;
@@ -161,5 +165,117 @@ INSERT INTO `016_26batch`.studentinfo (s_id, s_name, contact) VALUES
 (24, 'Isha', 9876543233),
 (25, 'Yash', 9876543234);
 
-
 select * from studentinfo;
+
+-- ---------------------------------------------------------------------------------------------------------  -
+
+-- create location table
+create table location(
+location_id int primary key,
+city varchar(10),
+pincoode varchar(6)
+);
+-- insert into data in location table
+insert into 016_26batch.location value(01,'Pune','004587');
+insert into 016_26batch.location value(02,'Mumbai','014587');
+select * from 016_26batch.location;
+
+
+
+
+
+-- department table 
+select * from department;
+alter table department add column location_id int ;
+
+ALTER TABLE department 
+ADD CONSTRAINT location_id_fk
+FOREIGN KEY (location_id) REFERENCES location(location_id);
+
+INSERT INTO 016_26batch.location (location_id, city, pincoode)
+VALUES
+
+(3, 'Delhi', '110001'),
+(4, 'Bangalore', '560001'),
+(5, 'Chennai', '600001'),
+(6, 'Hyderabad', '500001'),
+(7, 'Kolkata', '700001'),
+(8, 'Ahmedabad', '380001'),
+(9, 'Jaipur', '302001'),
+(10, 'Surat', '395001');
+
+alter table location rename column pincoode to pincode;
+
+SELECT * FROM location;
+SELECT location_id FROM location;
+INSERT INTO Department (dept_id, dept_name, location_id)
+VALUE
+(1, 'Human Resources', 1);
+
+
+INSERT INTO Department (dept_id, dept_name, location_id)
+VALUES
+(2, 'Finance', 2),
+(3, 'Information Technology', 3),
+(4, 'Marketing', 4),
+(5, 'Sales', 5),
+(6, 'Operations', 6),
+(7, 'Research and Development', 7),
+(8, 'Customer Support', 8),
+(9, 'Administration', 9),
+(10, 'Quality Assurance', 10);
+
+-- create manager table
+CREATE TABLE manager(
+    manager_id INT,
+    manager_name VARCHAR(20),
+    CONSTRAINT manager_id_pk PRIMARY KEY (manager_id)
+);
+insert into manager value(1,'Manoj');
+
+
+alter table 016_26batch.employee add column dept_id int ;
+ALTER TABLE 016_26batch.employee 
+ADD CONSTRAINT department_id_fk
+FOREIGN KEY (dept_id) REFERENCES department(dept_id);
+
+use 016_26Batch;
+
+select * from employee;
+select *  from department;
+select * from manager;
+
+alter table employee add foreign key(manager_id) references manager(manager_id);
+
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('2', 'Rakesh');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('3', 'Vivek');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('4', 'Akshay');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('5', 'Ajay');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('6', 'Sneha');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('7', 'Neha');
+INSERT INTO `016_26batch`.`manager` (`manager_id`, `manager_name`) VALUES ('8', 'Divya');
+
+-- read
+select * from manager;
+
+-- insert data
+INSERT INTO `016_26batch`.`employee` (`emp_id`, `emp_name`, `contact`, `dept_id`, `manager_id`) VALUES ('1', 'Akshay', '62003059', '1', '1');
+INSERT INTO `016_26batch`.`employee` (`emp_id`, `emp_name`, `contact`, `dept_id`, `manager_id`) VALUES ('2', 'Soham', '6200305902', '2', '2');
+INSERT INTO `016_26batch`.`employee` (`emp_id`, `emp_name`, `contact`, `dept_id`, `manager_id`) VALUES ('3', 'Mahadev', '6200305903', '3', '3');
+INSERT INTO `016_26batch`.`employee` (`emp_id`, `emp_name`, `contact`, `dept_id`, `manager_id`) VALUES ('4', 'Naina', '6200305904', '4', '4');
+
+-- update data 
+UPDATE `016_26batch`.`employee` SET `contact` = '6200305901' WHERE (`emp_id` = '1');
+select * from employee;
+
+alter table employee add column salary int ;
+
+-- update data 
+UPDATE `016_26batch`.`employee` SET `salary` = '89630' WHERE (`emp_id` = '2');
+
+-- update salary for the employee whoses name is Akash
+update employee set salary =12000 where emp_name="Akash";
+
+-- update name of the employee to Rajesh whose id is 3
+update employee set emp_name="Rajesh" where emp_id=3;
+
