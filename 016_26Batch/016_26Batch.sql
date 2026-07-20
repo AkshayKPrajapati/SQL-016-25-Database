@@ -279,3 +279,6 @@ update employee set salary =12000 where emp_name="Akash";
 -- update name of the employee to Rajesh whose id is 3
 update employee set emp_name="Rajesh" where emp_id=3;
 
+-- give 10 precent hike to the employee salary is less than 50000;
+update employee set salary= salary+(salary*0.1) where salary < 50000;
+select * from employee;
