@@ -273,12 +273,39 @@ alter table employee add column salary int ;
 -- update data 
 UPDATE `016_26batch`.`employee` SET `salary` = '89630' WHERE (`emp_id` = '2');
 
--- update salary for the employee whoses name is Akash
+-- update salary for the employee whose  name is Akash
 update employee set salary =12000 where emp_name="Akash";
 
 -- update name of the employee to Rajesh whose id is 3
 update employee set emp_name="Rajesh" where emp_id=3;
 
--- give 10 precent hike to the employee salary is less than 50000;
+-- give 10 percent  hike to the employee salary is less than 50000;
 update employee set salary= salary+(salary*0.1) where salary < 50000;
 select * from employee;
+
+
+-- remove all data from employee table
+truncate table employee;
+select * from employee;
+
+-- delete
+-- delete from studentInfo data where gender is Male 
+delete from 016_26batch.studentinfo where gender='M'; 
+select * from  016_26batch.studentinfo;
+
+-- multiple condition 
+-- delete student who are from mumbai and age <20;
+delete from studentInfo where location="Mumbai" and age<=20;
+
+-- delete student where s_id =?
+delete from studentInfo where s_id =12;
+
+
+-- ---- TCL ____________________________________
+use 016_26Batch;
+select * from location;
+insert into location(location_id,city,pincode) value(11,'Goa',856932);
+
+start transaction;
+insert into location(location_id,city,pincode) value(12,'Nashik',846932);
+rollback;
