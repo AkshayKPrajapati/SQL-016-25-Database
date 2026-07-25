@@ -309,3 +309,25 @@ insert into location(location_id,city,pincode) value(11,'Goa',856932);
 start transaction;
 insert into location(location_id,city,pincode) value(12,'Nashik',846932);
 rollback;
+
+
+commit;
+
+
+start transaction;
+insert into location(location_id,city,pincode) value(14,'Patna',746932);
+savepoint save1;
+delete from location where location_id=14;
+select * from location;
+rollback to save1;
+
+
+create user dummy identified by 'local@1';
+-- permission
+grant select on 016_26batch.location to  dummy;
+grant insert on 016_26batch.location to  dummy;
+
+-- revoke 
+revoke insert on 016_26batch.location from  dummy;
+
+drop user dummy;

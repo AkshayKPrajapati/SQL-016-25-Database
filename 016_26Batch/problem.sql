@@ -12,3 +12,6 @@ select * from department;
 select * from manager;
 
 update employee set manager_id=8 , dept_id =10 where emp_id=5;
+
+
+create user backend identified by 'backend';
