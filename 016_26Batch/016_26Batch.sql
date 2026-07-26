@@ -323,6 +323,7 @@ rollback to save1;
 
 
 create user dummy identified by 'local@1';
+
 -- permission
 grant select on 016_26batch.location to  dummy;
 grant insert on 016_26batch.location to  dummy;
@@ -331,3 +332,4 @@ grant insert on 016_26batch.location to  dummy;
 revoke insert on 016_26batch.location from  dummy;
 
 drop user dummy;
+drop user backend;
