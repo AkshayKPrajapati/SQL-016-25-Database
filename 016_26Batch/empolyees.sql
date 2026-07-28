@@ -184,3 +184,64 @@ select * from employees where FIRST_NAME like '%nn%';
 
 -- find 3 character name 
 select * from employees where FIRST_NAME like '___';
+
+
+
+-- function in sql
+select FIRST_NAME , length(FIRST_NAME) as size from employees;
+-- character 5
+select * from employees where length(LAST_NAME)=5;
+
+
+-- 21 Aug
+-- hey
+select concat('hey ' , FIRST_NAME , ' Welcome ' ) as greeting from employees;
+-- Display Full Name 
+select concat(FIRST_NAME ,' ', LAST_NAME) as FULL_NAME from employees;
+select concat(FIRST_NAME ,' ', LAST_NAME) as FULL_NAME, FIRST_NAME,LAST_NAME from employees;
+
+-- upper case and lower case 
+select upper(FIRST_NAME),lower(LAST_NAME) from employees;
+
+-- sub str (originalName, StartingIndex, Length)
+
+select substr('Akshay', 1,3);  -- AKS
+select substr('FusionSoftwareInstitute',3,8); -- 'sionSoft'
+select substr('FusionSoftwareInstitute',-4,2); -- tu // reverse character
+-- full name starting 5 character of full Name 
+select FIRST_NAME,LAST_NAME ,substr(concat(FIRST_NAME,LAST_NAME),1,5) as Info  from employees;
+
+-- display half part of the name 
+select FIRST_NAME, substr(FIRST_NAME,1,length(FIRST_NAME)/2) as HAIF_NAME from employees;
+
+
+-- instr: it is used to return the position of specific character 
+select instr('Fusion','s'); -- 3 
+select instr('Fusion', 'y'); -- 0
+-- find employee whose FIRST_NAME do not have 'n'
+select FIRST_NAME from employees where instr(FIRST_NAME,'n')=0;
+-- Aggregate Function // grouping function
+
+select * from employees;
+select max(SALARY) from employees; -- 17000
+select min(SALARY) from employees; -- 2100
+select avg(SALARY) from employees; -- 6061.0980
+select sum(SALARY) from employees; -- 309116
+select count(*) from employees; -- 51
+
+
+-- group by 
+select DEPARTMENT_ID ,max(SALARY) from employees group by DEPARTMENT_ID;
+
+-- find the how many  employee are there for every department;
+ select DEPARTMENT_ID ,count(*) from employees group by DEPARTMENT_ID;
+-- How many people in the same names
+select FIRST_NAME , count(*) from employees group by FIRST_NAME;
+
+-- Duplicate value
+select FIRST_NAME , count(*) from employees group by FIRST_NAME having count(*)>1;
+
+-- find department where minium 3 employees are there 
+select  DEPARTMENT_ID , count(*) from employees group by DEPARTMENT_ID having count(*)>=3;
+select  DEPARTMENT_ID , count(*) from employees group by DEPARTMENT_ID having (count(*)>=3);
+
