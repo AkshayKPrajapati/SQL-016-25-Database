@@ -245,3 +245,17 @@ select FIRST_NAME , count(*) from employees group by FIRST_NAME having count(*)>
 select  DEPARTMENT_ID , count(*) from employees group by DEPARTMENT_ID having count(*)>=3;
 select  DEPARTMENT_ID , count(*) from employees group by DEPARTMENT_ID having (count(*)>=3);
 
+-- find department and department wise avarge salary of employees whose first name has 'a' and avager salary should be grater than 5000
+select DEPARTMENT_ID, avg(SALARY) from employees where FIRST_NAME like '%a%' 
+group by DEPARTMENT_ID having avg(SALARY) order by DEPARTMENT_ID;
+
+
+
+
+-- window function
+select *,row_number() over(order by salary) as row_nums,
+rank () over(order by salary) as 'rank',
+dense_rank () over(order by salary) as 'drank'
+from employees;
+
+
